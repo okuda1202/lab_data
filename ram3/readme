@@ -1,0 +1,29 @@
+RAMBleedでPMKの抜き取りを目指す
+
+correct_trim.shをすると成功時だけ抜き出せる
+
+offset_arrange.shでcorrect_trim.csvを出力
+ram2のオフセットは0xfc0 = 4032
+4032* 8 = 32,256
+
+correct_trim.csvに対して
+sort -t',' -k2,2n correct_arrange.csv >> test_b.csv
+を実行する。
+2列目の値でソートしてtest_〇.csvというファイルに格納
+test_a.csvはip198, test_b.csvはip219のほうです。
+
+make_64.cppでビット列に直す。毎回test_a.csvとtest_b.csvを書き換える必要があり面倒
+複数の候補がある場合には多いほうを選択。
+単純に出力してるだけなので今後改善したい。
+
+compare_a_b.cppでmake_64.cppで出力したビット列を比較する。
+
+
+make_ASCKII.cppはビット列の2の部分を0と1に置き換えたものを列挙
+今は1バイトしか作ってないけど今後は64ビットにしよう
+
+
+追加したい
+compare_a_b.cppで両方とも同じビット値ならそれで確定。違うなら2にする形で一応のビット列の候補を作りたい
+
+
